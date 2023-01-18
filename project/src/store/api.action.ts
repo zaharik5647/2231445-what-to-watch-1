@@ -1,21 +1,20 @@
-import {AxiosInstance} from 'axios';
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import {Film} from '../types/film.type';
-import {fillFilms, setFilmsLoadedStatus} from './actions';
-import {AppDispatch, State} from '../types/state.type';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
+import { AppDispatch, State } from '../types/state.type';
+import { Film } from '../types/film.type';
+import { APIRoute} from '../constants/all-genres';
+import { fillFilms, setDataLoadedStatus } from './actions';
 
-type ApiConfig = {
+export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
-};
-
-export const fetchFilmsAction = createAsyncThunk<void, undefined, ApiConfig>(
+}>(
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setFilmsLoadedStatus(false));
-    const resp = await api.get<Film[]>('films');
-    dispatch(fillFilms({films: resp.data}));
-    dispatch(setFilmsLoadedStatus(true));
+    dispatch(setDataLoadedStatus(false));
+    const { data } = await api.get<Film[]>(APIRoute.Films);
+    dispatch(fillFilms(data));
+    dispatch(setDataLoadedStatus(true));
   },
 );

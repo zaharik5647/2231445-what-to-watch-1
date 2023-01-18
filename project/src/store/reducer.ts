@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, fillFilms, setFilmsLoadedStatus } from './actions';
+import { changeGenre, fillFilms, setDataLoadedStatus } from './actions';
 import { Film } from '../types/film.type';
 import {ALL_GENRES} from '../constants/all-genres';
 
@@ -15,15 +15,16 @@ const initialState: AppState = {
   isDataLoaded: false
 };
 
+
 export const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
-      state.activeGenre = action.payload.genre;
+      state.activeGenre = action.payload;
     })
     .addCase(fillFilms, (state, action) => {
-      state.films = action.payload.films;
+      state.films = action.payload;
     })
-    .addCase(setFilmsLoadedStatus, (state, action) => {
+    .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
     });
 });
