@@ -10,8 +10,6 @@ import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
 
-
-
 type MainPageProps = {
   film: Film;
 }

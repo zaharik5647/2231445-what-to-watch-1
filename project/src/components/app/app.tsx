@@ -9,8 +9,8 @@ import Loader from '../loader/loader';
 import { Review } from '../../types/review-type';
 import PrivateRoute from '../private-route/private-route';
 import MyListPage from '../../pages/my-list/my-list-page';
-import AddReview from "../../pages/addReview/addReview";
-import NotFoundPage from "../../pages/not-found/not-found-page";
+import AddReview from '../../pages/addReview/addReview';
+import NotFoundPage from '../../pages/not-found/not-found-page';
 
 type Props = {
   reviews: Review[];
