@@ -9,6 +9,7 @@ import ShowMore from '../../components/show-more/show-more';
 import GenresList from '../../components/genres-list/genres-list';
 import Logo from '../../components/logo/logo';
 import UserBlock from '../../components/user-block/user-block';
+import MyListButton from '../../components/my-list-button/my-list-button';
 
 type MainPageProps = {
   film: Film;
@@ -56,13 +57,10 @@ function MainPage({film}: MainPageProps) : JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                {
+                  film
+                  && <MyListButton filmId={film.id} />
+                }
               </div>
             </div>
           </div>

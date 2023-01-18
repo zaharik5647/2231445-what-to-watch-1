@@ -10,11 +10,11 @@ import { useAppSelector } from '../../hooks/hooks';
 import Loader from '../loader/loader';
 import PrivateRoute from '../private-route/private-route';
 import MyListPage from '../../pages/my-list/my-list-page';
-import HistoryRouter from "../history-router/history-router";
-import browserHistory from "../../browse-history";
+import HistoryRouter from '../history-router/history-router';
+import browserHistory from '../../browse-history';
 
 function App(): JSX.Element {
-  const { isDataLoaded, films, authorizationStatus } = useAppSelector((state) => state);
+  const { isDataLoaded, films, authorizationStatus, favoriteFilms } = useAppSelector((state) => state);
 
   if (!isDataLoaded) {
     return <Loader/>;
@@ -45,7 +45,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.NOTFOUND} element={<NotFound />} />
         <Route path={AppRoute.MYLIST} element={
           <PrivateRoute authorizationStatus={authorizationStatus}>
-            <MyListPage films={films} />
+            <MyListPage films={favoriteFilms} />
           </PrivateRoute>
         }
         />

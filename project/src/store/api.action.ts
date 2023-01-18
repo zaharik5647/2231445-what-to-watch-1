@@ -3,10 +3,10 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state.type';
 import { Film } from '../types/film.type';
 import { APIRoute, AuthorizationStatus } from '../constants/all-genres';
-import { fillFilms, setDataLoadedStatus, changeAuthorizationStatus, setUser } from './actions';
+import { fillFilms, setDataLoadedStatus, changeAuthorizationStatus, setUser, setFavouriteFilms } from './actions';
 import { saveToken, dropToken } from '../services/token';
-import {User} from '../types/user.type';
-import {AuthData} from '../types/auth.data.type';
+import { User } from '../types/user.type';
+import { AuthData } from '../types/auth.data.type';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -62,6 +62,19 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dispatch(changeAuthorizationStatus(AuthorizationStatus.NoAuth));
+    dispatch(setFavouriteFilms([]));
     dropToken();
+  }
+);
+
+export const fetchFavouriteFilms = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteFilms',
+  async (_arg, {dispatch, extra: api}) => {
+    const { data: favouriteFilms } = await api.get<Film[]>(APIRoute.Favorite);
+    dispatch(setFavouriteFilms(favouriteFilms));
   }
 );
