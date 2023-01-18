@@ -2,8 +2,7 @@ import Header from '../../components/header/header';
 import FilmCard from '../../components/film-card/film-card';
 import Footer from '../../components/footer/footer';
 
-const HREF_DEFAULT = 'film-card-page.html';
-export default function MyListPage(): JSX.Element {
+export default function MyListPage() {
   return (
     <div className='user-page'>
       <Header />
@@ -11,57 +10,48 @@ export default function MyListPage(): JSX.Element {
         <h2 className='catalog__title visually-hidden'>Catalog</h2>
         <div className='catalog__films-list'>
           <FilmCard
-            image={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'}
+            imageUrl={'img/fantastic-beasts-the-crimes-of-grindelwald.jpg'}
             name={'Fantastic Beasts: The Crimes of Grindelwald'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/bohemian-rhapsody.jpg'}
+            imageUrl={'img/bohemian-rhapsody.jpg'}
             name={'Bohemian Rhapsody'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/macbeth.jpg'}
+            imageUrl={'img/macbeth.jpg'}
             name={'Macbeth'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/aviator.jpg'}
+            imageUrl={'img/aviator.jpg'}
             name={'Aviator'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/we-need-to-talk-about-kevin.jpg'}
+            imageUrl={'img/we-need-to-talk-about-kevin.jpg'}
             name={'We need to talk about Kevin'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/what-we-do-in-the-shadows.jpg'}
+            imageUrl={'img/what-we-do-in-the-shadows.jpg'}
             name={'What We Do in the Shadows'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/revenant.jpg'}
+            imageUrl={'img/revenant.jpg'}
             name={'Revenant'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/johnny-english.jpg'}
+            imageUrl={'img/johnny-english.jpg'}
             name={'Johnny English'}
-            href={HREF_DEFAULT}
           />
 
           <FilmCard
-            image={'img/shutter-island.jpg'}
+            imageUrl={'img/shutter-island.jpg'}
             name={'Shutter Island'}
-            href={HREF_DEFAULT}
           />
         </div>
       </section>
