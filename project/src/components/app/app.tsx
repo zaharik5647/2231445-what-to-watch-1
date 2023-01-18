@@ -18,6 +18,7 @@ const App : FC = () => {
   if (!isDataLoaded){
     return <Loader/>;
   }
+  
   const film = films[0];
   const filmList = films
     .filter((f) => f.genre === activeGenre || activeGenre === ALL_GENRES);
