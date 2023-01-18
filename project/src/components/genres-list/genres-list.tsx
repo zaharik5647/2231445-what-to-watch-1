@@ -1,5 +1,5 @@
-import {useAppDispatch} from '../../hooks/hooks';
-import {changeGenre} from '../../store/actions';
+import { useAppDispatch } from '../../hooks/hooks';
+import { changeGenre } from '../../store/actions';
 
 type Props = {
   genres: string[];

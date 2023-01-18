@@ -1,12 +1,11 @@
-import Footer from '../../components/footer/footer';
 import Logo from '../../components/logo/logo';
 import { Film } from '../../types/film.type';
 import FilmsList from '../../components/film-list/film-list';
 import { Review } from '../../types/review-type';
 import Tabs from '../../components/tabs/tabs';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import UserBlock from '../../components/user-block/user-block';
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { AppRoute, AuthorizationStatus } from '../../constants/all-genres';
 import { StatusCodes } from 'http-status-codes';
@@ -16,10 +15,8 @@ import Loader from '../../components/loader/loader';
 import { api } from '../../services/api';
 import MyListButton from '../../components/my-list-button/my-list-button';
 
-const MAX_SIMILAR_FILMS_COUNT = 4;
-
-function FilmPage(): JSX.Element {
-  const [dataLoaded, setData] = useState(false);
+const FilmPage: FC = () => {
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [film, setFilm] = useState<null | Film>(null);
   const [similarFilms, setSimilarFilms] = useState<null | Film[]>(null);
   const [reviews, setReviews] = useState<null | Review[]>(null);
@@ -43,11 +40,11 @@ function FilmPage(): JSX.Element {
       setReviews(filmReviews);
     };
 
-    setData(false);
+    setDataLoaded(false);
     fetchFilm()
       .then(() => fetchSimilarFilms())
       .then(() => fetchFilmReviews())
-      .then(() => setData(true))
+      .then(() => setDataLoaded(true))
       .catch((err: AxiosError) => {
         if (err.response && err.response.status === StatusCodes.NOT_FOUND) {
           dispatch(redirectToRoute(AppRoute.NOTFOUND));
@@ -55,8 +52,17 @@ function FilmPage(): JSX.Element {
       });
   }, [id]);
 
+  const handlePlayerBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!film) {
+      return;
+    }
+
+    dispatch(redirectToRoute(`/player/${film.id}`));
+  };
+
   if (!dataLoaded) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return (
@@ -64,15 +70,15 @@ function FilmPage(): JSX.Element {
       <section className="film-card film-card--full">
         <div className="film-card__hero">
           <div className="film-card__bg">
-            <img src={film?.backgroundImage} alt={film?.name}/>
+            <img src={film?.backgroundImage} alt={film?.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
 
           <header className="page-header film-card__head">
-            <Logo/>
+            <Logo />
 
-            <UserBlock/>
+            <UserBlock />
           </header>
 
           <div className="film-card__wrap">
@@ -84,21 +90,17 @@ function FilmPage(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" type="button" onClick={handlePlayerBtnClick}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                {
-                  film
-                  && <MyListButton filmId={film.id} />
-                }
+                {film && <MyListButton filmId={film.id} /> }
                 {
                   authorizationStatus === AuthorizationStatus.Auth &&
-                  <Link to={id ? `/films/${id}/review` : '#'} className="btn film-card__button">Add review</Link>
+                  <a href={id ? `/films/${id}/review` : '#'} className="btn film-card__button">Add review</a>
                 }
-
               </div>
             </div>
           </div>
@@ -114,16 +116,29 @@ function FilmPage(): JSX.Element {
           </div>
         </div>
       </section>
+
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          {similarFilms && <FilmsList films={similarFilms.slice(0, MAX_SIMILAR_FILMS_COUNT)}/>}
+
+          {similarFilms && <FilmsList films={similarFilms} />}
         </section>
 
-        <Footer/>
+        <footer className="page-footer">
+          <div className="logo">
+            <a className="logo__link logo__link--light">
+              <span className="logo__letter logo__letter--1">W</span>
+              <span className="logo__letter logo__letter--2">T</span>
+              <span className="logo__letter logo__letter--3">W</span>
+            </a>
+          </div>
+
+          <div className="copyright">
+            <p>© 2019 What to watch Ltd.</p>
+          </div>
+        </footer>
       </div>
     </>
   );
-}
-
+};
 export default FilmPage;

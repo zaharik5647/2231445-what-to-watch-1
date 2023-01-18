@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import {
   changeAuthorizationStatus,
   changeGenre,
@@ -7,9 +7,9 @@ import {
   setFavouriteFilms,
   setUser
 } from './actions';
-import {Film} from '../types/film.type';
-import {ALL_GENRES, AuthorizationStatus} from '../constants/all-genres';
-import {User} from '../types/user.type';
+import { Film } from '../types/film.type';
+import { ALL_GENRES, AuthorizationStatus } from '../constants/all-genres';
+import { User } from '../types/user.type';
 
 type AppState = {
   films: Film[];
