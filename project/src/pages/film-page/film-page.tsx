@@ -73,4 +73,4 @@ function FilmPage({film, films, reviews}: Props): JSX.Element {
     </>
   );
 }
-export default FilmPage;
+export default FilmPage; 
