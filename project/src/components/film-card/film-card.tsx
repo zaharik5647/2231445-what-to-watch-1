@@ -2,7 +2,7 @@ import {Film} from '../../types/film.type';
 import {useEffect, useState} from 'react';
 import VideoPlayer from '../video-player/video-player';
 
-export type FilmCardProps  = {
+export type FilmCardProps = {
   film: Film;
   onHover: (film: Film) => void;
 }
