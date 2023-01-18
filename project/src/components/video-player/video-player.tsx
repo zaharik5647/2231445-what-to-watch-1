@@ -30,7 +30,7 @@ const VideoPlayer: FC<VideoPlayerProps> = (props) => {
     <video
       ref={playerRef}
       src={film.previewVideoLink}
-      poster={film.posterImage}
+      poster={film.previewImage}
       muted={!needSound}
       width={width}
       height={height}

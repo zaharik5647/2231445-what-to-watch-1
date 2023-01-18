@@ -11,7 +11,7 @@ const FilmReview: FC<FilmReviewProps> = (props) => {
   return (
     <div className="review">
       <blockquote className="review__quote">
-        <p className="review__text">{review.text}</p>
+        <p className="review__text">{review.comment}</p>
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
