@@ -1,45 +1,49 @@
-import { FC } from 'react';
 import MainPage from '../../pages/main/main-page';
-import NotFoundPage from '../../pages/not-found/not-found-page';
 import SignInPage from '../../pages/sign-in/sign-in-page';
-import PrivateRoute from '../private-route/private-route';
 import FilmPage from '../../pages/film-page/film-page';
-import AddReviewPage from '../../pages/addReview/addReview';
-import { ROUTES, AuthorizationStatus } from '../../constants/routes';
-import MyListPage from '../../pages/my-list/my-list-page';
+import { AppRoute } from '../../constants/all-genres';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PlayerPage from '../../pages/player/player-page';
 import { useAppSelector } from '../../hooks/hooks';
 import Loader from '../loader/loader';
-import { ALL_GENRES } from '../../constants/all-genres';
+import { Review } from '../../types/review-type';
+import PrivateRoute from '../private-route/private-route';
+import MyListPage from '../../pages/my-list/my-list-page';
+import AddReview from '../../pages/addReview/addReview';
+import NotFoundPage from '../../pages/not-found/not-found-page';
 
-const App : FC = () => {
-  const {films, activeGenre, isDataLoaded} = useAppSelector((selector) => selector);
-  if (!isDataLoaded){
+type Props = {
+  reviews: Review[];
+}
+
+function App({reviews}: Props): JSX.Element {
+  const { isDataLoaded, films, authorizationStatus } = useAppSelector((state) => state);
+
+  if (!isDataLoaded) {
     return <Loader/>;
   }
-  const film = films[0];
-  const filmList = films
-    .filter((f) => f.genre === activeGenre || activeGenre === ALL_GENRES);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTES.MAIN} element={<MainPage film={film} />}/>
-        <Route path={ROUTES.SIGNIN} element={<SignInPage/>}/>
-        <Route
-          path={ROUTES.MYLIST}
-          element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListPage films={filmList}/>
-            </PrivateRoute>
-          }
+        <Route path={AppRoute.MAIN} element={
+          <MainPage
+            film={films[0]}
+          />
+        }
         />
-        <Route path={ROUTES.FILM} element={<FilmPage films={filmList}/>}/>
-        <Route path={ROUTES.ADDREVIEW} element={<AddReviewPage/>}/>
-        <Route path={ROUTES.PLAYER} element={<PlayerPage/>}/>
-        <Route path={ROUTES.NOTFOUND} element={<NotFoundPage/>}/>
+        <Route path={AppRoute.SIGNIN} element={<SignInPage />} />
+        <Route path={AppRoute.FILM} element={<FilmPage film={films[0]} films={films} reviews={reviews}/>} />
+        <Route path={AppRoute.ADDREVIEW} element={<AddReview film={films[0]} />} />
+        <Route path={AppRoute.PLAYER} element={<PlayerPage film={films[0]}/>} />
+        <Route path={AppRoute.NOTFOUND} element={<NotFoundPage />} />
+        <Route path={AppRoute.MYLIST} element={
+          <PrivateRoute authorizationStatus={authorizationStatus}>
+            <MyListPage films={films} />
+          </PrivateRoute>
+        }
+        />
       </Routes>
     </BrowserRouter>
   );
-};
+}
 export default App;
