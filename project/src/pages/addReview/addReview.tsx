@@ -17,10 +17,10 @@ export default function AddReviewPage() {
             <ul className='breadcrumbs__list'>
               <li className='breadcrumbs__item'>
                 <a className='breadcrumbs__link'>The Grand Budapest Hotel</a>
-                </li>
+              </li>
               <li className='breadcrumbs__item'>
                 <a className='breadcrumbs__link'>Add review</a>
-                </li>
+              </li>
             </ul>
           </nav>
 
@@ -32,7 +32,7 @@ export default function AddReviewPage() {
             </li>
             <li className='user-block__item'>
               <a className='user-block__link'>Sign out</a>
-                </li>
+            </li>
           </ul>
         </header>
 
