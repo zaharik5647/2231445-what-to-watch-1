@@ -3,7 +3,11 @@ import { Film } from '../../types/film.type';
 import FilmList from '../../components/film-list/film-list';
 import { useAppSelector } from '../../hooks/hooks';
 import { ALL_GENRES } from '../../constants/all-genres';
+import { SHOWN_FILMS_STEP } from '../../constants/routes';
+import { useState } from 'react';
+import ShowMore from '../../components/show-more/show-more';
 import GenresList from '../../components/genres-list/genres-list';
+import Logo from '../../components/logo/logo';
 
 
 type MainPageProps = {
@@ -11,9 +15,15 @@ type MainPageProps = {
 }
 function MainPage({film}: MainPageProps) : JSX.Element {
   const { films, activeGenre } = useAppSelector((state) => state);
+  const [visibleFilmsCount, setVisibleFilmsCount] = useState(SHOWN_FILMS_STEP);
   const genres = [ALL_GENRES].concat([...new Set(films.map((f) => f.genre))]);
   const filteredFilms = films
-    .filter((f) => f.genre === activeGenre || activeGenre === ALL_GENRES);
+    .filter((f) => f.genre === activeGenre || activeGenre === ALL_GENRES)
+    .slice(0, visibleFilmsCount);
+
+  const showMoreClick = () => {
+    setVisibleFilmsCount(visibleFilmsCount + SHOWN_FILMS_STEP);
+  };
   return (
     <>
       <section className="film-card">
@@ -23,13 +33,8 @@ function MainPage({film}: MainPageProps) : JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo/>
+
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
@@ -37,10 +42,11 @@ function MainPage({film}: MainPageProps) : JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <a href={'/'} className="user-block__link">Sign out</a>
             </li>
           </ul>
         </header>
+
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
@@ -76,9 +82,7 @@ function MainPage({film}: MainPageProps) : JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList genres={genres} activeGenre={activeGenre}/>
           <FilmList films={filteredFilms}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {filteredFilms.length % SHOWN_FILMS_STEP === 0 && <ShowMore onClick={showMoreClick}/>}
         </section>
         <Footer/>
       </div>

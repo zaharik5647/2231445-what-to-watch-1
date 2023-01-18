@@ -1,8 +1,10 @@
 import {Film} from '../../types/film.type';
 import {useEffect, useState} from 'react';
 import VideoPlayer from '../video-player/video-player';
+import { Link } from 'react-router-dom';
 
-export type FilmCardProps  = {
+
+export type FilmCardProps = {
   film: Film;
   onHover: (film: Film) => void;
 }
@@ -44,7 +46,7 @@ function FilmCard({film, onHover}: FilmCardProps): JSX.Element {
         />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="/">{film.name}</a>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
       </h3>
     </article>
   );

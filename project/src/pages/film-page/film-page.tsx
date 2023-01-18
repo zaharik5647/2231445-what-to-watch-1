@@ -85,9 +85,7 @@ const FilmPage: FC<FilmPageProps> = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-          <div className="catalog__films-list">
-            <FilmList films={filtredFilms}/>
-          </div>
+          <FilmList films={filtredFilms}/>
         </section>
         <Footer />
       </div>
