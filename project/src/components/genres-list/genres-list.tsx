@@ -1,5 +1,5 @@
-import {useAppDispatch} from '../../hooks/hooks';
-import {changeGenre} from '../../store/actions';
+import { useAppDispatch } from '../../hooks/hooks';
+import { changeGenre } from '../../store/actions';
 
 type Props = {
   genres: string[];
@@ -20,7 +20,7 @@ function GenresList({genres, activeGenre}: Props): JSX.Element {
           <li className={`catalog__genres-item ${activeGenre === genre ? 'catalog__genres-item--active' : ''}`} key={genre} onClick={() => handleGenreChange(genre)}>
             <span className="catalog__genres-link">{genre}</span>
           </li>
-          ))
+        ))
       }
     </ul>
   );

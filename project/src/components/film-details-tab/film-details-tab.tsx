@@ -1,5 +1,5 @@
-import {FC} from 'react';
-import {getRunTime} from '../../helpers/time-helper';
+import { FC } from 'react';
+import { getRunTime } from '../../helpers/time-helper';
 import { Film } from '../../types/film.type';
 
 type FilmDetailsTabProps = {

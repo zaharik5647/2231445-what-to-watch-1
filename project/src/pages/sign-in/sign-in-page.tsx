@@ -1,10 +1,9 @@
 import Logo from '../../components/logo/logo';
-import Footer from '../../components/footer/footer';
-import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {useNavigate} from 'react-router-dom';
-import {AppRoute, AuthorizationStatus} from '../../constants/all-genres';
-import {FormEvent, useRef} from 'react';
-import {loginAction} from '../../store/api.action';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useNavigate} from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../constants/all-genres';
+import { FormEvent, useRef } from 'react';
+import { loginAction } from '../../store/api.action';
 
 
 function SignInPage() : JSX.Element {
@@ -42,13 +41,13 @@ function SignInPage() : JSX.Element {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                     id="user-email" ref={loginRef}
+                id="user-email" ref={loginRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                     id="user-password" ref={passwordRef}
+                id="user-password" ref={passwordRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
@@ -58,7 +57,19 @@ function SignInPage() : JSX.Element {
           </div>
         </form>
       </div>
-      <Footer/>
+      <footer className="page-footer">
+        <div className="logo">
+          <a className="logo__link logo__link--light">
+            <span className="logo__letter logo__letter--1">W</span>
+            <span className="logo__letter logo__letter--2">T</span>
+            <span className="logo__letter logo__letter--3">W</span>
+          </a>
+        </div>
+
+        <div className="copyright">
+          <p>© 2019 What to watch Ltd.</p>
+        </div>
+      </footer>
     </div>
   );
 }
