@@ -1,36 +1,36 @@
-import {Fragment, useState, ChangeEvent, FocusEvent} from 'react';
+import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
+import { ReviewData } from '../../types/review.data';
 
-type ReviewFormValue = {
-  starsCount: number;
-  reviewText: string;
-};
+const MAX_STARS_COUNT = 10;
+const MAX_COMMENT_LEN = 400;
+const MIN_COMMENT_LEN = 50;
 
-function ReviewForm(): JSX.Element {
-  const [formValue, setFormValue] = useState<ReviewFormValue>({
-    starsCount: 0,
-    reviewText: ''
-  });
+type Props = {
+  disabled: boolean;
+  onSubmit: (reviewData: ReviewData) => void;
+}
+function ReviewForm({disabled, onSubmit}: Props): JSX.Element {
+  const [comment, setComment] = useState('');
+  const [starsCount, setRating] = useState(0);
+
+  const handleReviewSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    onSubmit({comment: comment, starsCount: starsCount});
+  };
 
   const handleChangeComment = (evt: ChangeEvent<HTMLTextAreaElement>) => {
-    setFormValue((prevValue) => ({
-      ...prevValue,
-      reviewText: evt.target.value
-    }));
+    setComment(evt.target.value);
   };
 
   const handleChangeRating = (evt: ChangeEvent<HTMLInputElement>) => {
-    setFormValue((prevState) => ({
-      ...prevState,
-      starsCount: Number(evt.target.value)
-    }));
+    const value = parseInt(evt.target.value, 10);
+    setRating(value);
   };
 
-  const handleSubmit = (evt: FocusEvent<HTMLFormElement>) => {
-    throw new Error('kek');
-  };
+  const isSubmitDisabled = comment.length < MIN_COMMENT_LEN || comment.length > MAX_COMMENT_LEN || disabled;
 
-  const ratingStars = [Array(10).keys()].map((_, index) => {
-    const currentStar = formValue.starsCount - index;
+  const ratingStars = [Array(MAX_STARS_COUNT).keys()].map((_, index) => {
+    const currentStar = MAX_STARS_COUNT - index;
 
     return (
       <Fragment key={currentStar}>
@@ -52,7 +52,7 @@ function ReviewForm(): JSX.Element {
   });
 
   return (
-    <form className="add-review__form" onSubmit={handleSubmit}>
+    <form className="add-review__form" onSubmit={handleReviewSubmit}>
       <div className="rating">
         <div className="rating__stars">
           {ratingStars}
@@ -64,17 +64,16 @@ function ReviewForm(): JSX.Element {
           id="review-text"
           className="add-review__textarea"
           name="review-text"
-          value={formValue.reviewText}
+          value={comment}
           placeholder="ReviewType text"
           onChange={handleChangeComment}
+          disabled={disabled}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit">Post</button>
+          <button className="add-review__btn" disabled={isSubmitDisabled} type="submit">Post</button>
         </div>
 
       </div>
     </form>
   );
-}
-
-export default ReviewForm;
+}export default ReviewForm;

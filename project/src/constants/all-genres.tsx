@@ -11,15 +11,15 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-export const AppRoute = {
-  MAIN: '/',
-  SIGNIN: '/login',
-  MYLIST: '/mylist',
-  FILM: '/films/:id',
-  ADDREVIEW: '/films/:id/film-review',
-  PLAYER: '/player/:id',
-  NOTFOUND: '*',
-  FILMPREFIX: '/films'
-};
+export enum AppRoute {
+  MAIN = '/',
+  SIGNIN = '/login',
+  MYLIST = '/mylist',
+  FILM = '/films/:id',
+  ADDREVIEW = '/films/:id/review',
+  PLAYER = '/player/:id',
+  NOTFOUND = '*',
+  FILMPREFIX = '/films'
+}
 
 
