@@ -41,13 +41,13 @@ function SignInPage() : JSX.Element {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input" type="email" placeholder="Email address" name="user-email"
-                     id="user-email" ref={loginRef}
+                id="user-email" ref={loginRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
             </div>
             <div className="sign-in__field">
               <input className="sign-in__input" type="password" placeholder="Password" name="user-password"
-                     id="user-password" ref={passwordRef}
+                id="user-password" ref={passwordRef}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>
