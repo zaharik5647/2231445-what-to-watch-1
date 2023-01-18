@@ -1,20 +1,20 @@
-import React from 'react';
+import {StrictMode} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { Provider } from 'react-redux';
-import { store } from './store';
-import { fetchFilmsAction } from './store/api.action';
-
+import {Provider} from 'react-redux';
+import {store} from './store';
+import { checkAuthAction, fetchFilmsAction } from './store/api.action';
+store.dispatch(checkAuthAction());
+store.dispatch(fetchFilmsAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
-
-store.dispatch(fetchFilmsAction());
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
-      <App />
+      <App reviews={[]} />
     </Provider>
-  </React.StrictMode>,
+  </StrictMode>,
 );
+
