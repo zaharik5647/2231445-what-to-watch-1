@@ -14,7 +14,7 @@ function GenresList({genres, activeGenre}: Props): JSX.Element {
   const handleChangeActiveGenre = (genre: string) => {
     dispatch(changeGenre({genre: genre}));
     dispatch(fillFilms({films: mockFilms.filter((film) => film.genre === genre || genre === ALL_GENRES)}));
-};
+  };
 
   return (
     <ul className="catalog__genres-list">
@@ -26,7 +26,7 @@ function GenresList({genres, activeGenre}: Props): JSX.Element {
         ))
       }
     </ul>
-    );
-  }
+  );
+}
 
 export default GenresList;
