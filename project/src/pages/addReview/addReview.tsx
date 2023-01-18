@@ -35,7 +35,7 @@ function AddReview({film}: Props): JSX.Element {
         </div>
       </div>
       <div className="add-review">
-        <ReviewForm />
+        <ReviewForm/>
       </div>
     </section>
   );
