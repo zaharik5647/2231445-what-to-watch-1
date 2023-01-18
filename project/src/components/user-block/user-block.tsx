@@ -1,8 +1,8 @@
-import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {logoutAction} from '../../store/api.action';
-import {MouseEvent} from 'react';
-import {Link} from 'react-router-dom';
-import {AuthorizationStatus} from '../../constants/all-genres';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { logoutAction } from '../../store/api.action';
+import { MouseEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthorizationStatus } from '../../constants/all-genres';
 
 export type Props = {
   avatar: string;

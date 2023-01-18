@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import { Film } from '../../types/film.type';
 import FilmCard from '../film-card/film-card';
 

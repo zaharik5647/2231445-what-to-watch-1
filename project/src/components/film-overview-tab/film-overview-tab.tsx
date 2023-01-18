@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import { FC } from 'react';
 import { Film } from '../../types/film.type';
 
 type FilmOverviewTabProps = {

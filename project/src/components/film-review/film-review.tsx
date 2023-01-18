@@ -1,5 +1,5 @@
-import {Review} from '../../types/review-type';
-import {FC} from 'react';
+import { Review } from '../../types/review-type';
+import { FC } from 'react';
 
 type FilmReviewProps = {
   review: Review;
