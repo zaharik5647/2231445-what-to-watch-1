@@ -14,3 +14,5 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const SHOWN_FILMS_STEP = 8;
