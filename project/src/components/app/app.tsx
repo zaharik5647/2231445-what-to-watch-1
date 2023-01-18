@@ -9,15 +9,18 @@ import { ROUTES, AuthorizationStatus } from '../../constants/routes';
 import MyListPage from '../../pages/my-list/my-list-page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PlayerPage from '../../pages/player/player-page';
-import { Film } from '../../types/film.type';
+import { useAppSelector } from '../../hooks/hooks';
+import Loader from '../loader/loader';
+import { ALL_GENRES } from '../../constants/all-genres';
 
-type AppProps = {
-  film: Film;
-  filmList: Film[];
-}
-
-const App : FC<AppProps> = (props) => {
-  const { film, filmList } = props;
+const App : FC = () => {
+  const {films, activeGenre, isDataLoaded} = useAppSelector((selector) => selector);
+  if (!isDataLoaded){
+    return <Loader/>;
+  }
+  const film = films[0];
+  const filmList = films
+    .filter((f) => f.genre === activeGenre || activeGenre === ALL_GENRES);
   return (
     <BrowserRouter>
       <Routes>
