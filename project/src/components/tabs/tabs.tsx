@@ -5,12 +5,13 @@ import FilmDetailsTab from '../film-details-tab/film-details-tab';
 import FilmOverviewTab from '../film-overview-tab/film-overview-tab';
 import FilmReviewsTab from '../film-review-tab/film-review-tab';
 import { Review } from '../../types/review-type';
-import { TABS } from '../../constants/all-genres';
 
 type Props = {
   film: Film;
   reviews: Review[];
 }
+
+const TABS = ['Overview', 'Details', 'Reviews'];
 
 const Tabs: FC<Props> = (props) => {
   const { film, reviews } = props;

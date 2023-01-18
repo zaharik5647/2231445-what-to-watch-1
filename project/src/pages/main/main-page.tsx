@@ -1,19 +1,17 @@
+import React, { FC } from 'react';
+import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
+import { genres } from '../../constants/genres';
 import { Film } from '../../types/film.type';
 import FilmList from '../../components/film-list/film-list';
-import { useAppSelector } from '../../hooks/hooks';
-import { ALL_GENRES } from '../../constants/all-genres';
-import GenresList from '../../components/genres-list/genres-list';
 
 
 type MainPageProps = {
   film: Film;
+  filmsList: Film[];
 }
-function MainPage({film}: MainPageProps) : JSX.Element {
-  const { films, activeGenre } = useAppSelector((state) => state);
-  const genres = [ALL_GENRES].concat([...new Set(films.map((f) => f.genre))]);
-  const filteredFilms = films
-    .filter((f) => f.genre === activeGenre || activeGenre === ALL_GENRES);
+const MainPage: FC<MainPageProps> = (props) => {
+  const { film, filmsList } = props;
   return (
     <>
       <section className="film-card">
@@ -21,30 +19,16 @@ function MainPage({film}: MainPageProps) : JSX.Element {
           <img src={film.backgroundImage} alt={film.name}/>
         </div>
         <h1 className="visually-hidden">WTW</h1>
-
-        <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
-        </header>
+        <Header/>
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src={film.posterImage} alt={film.name} width="218" height="327"/>
+              <img
+                src={film.posterImage}
+                alt={film.name}
+                width="218"
+                height="327"
+              />
             </div>
             <div className="film-card__desc">
               <h2 className="film-card__title">{film.name}</h2>
@@ -55,13 +39,13 @@ function MainPage({film}: MainPageProps) : JSX.Element {
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
+                    <use xlinkHref="#play-s"/>
                   </svg>
                   <span>Play</span>
                 </button>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
+                    <use xlinkHref="#add"/>
                   </svg>
                   <span>My list</span>
                   <span className="film-card__count">9</span>
@@ -74,15 +58,28 @@ function MainPage({film}: MainPageProps) : JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <GenresList genres={genres} activeGenre={activeGenre}/>
-          <FilmList films={filteredFilms}/>
+          <ul className="catalog__genres-list">
+            {
+              genres.map((item) => (
+                <li className="catalog__genres-item catalog__genres-item--active" key={item}>
+                  <a href="#" className="catalog__genres-link">{item}</a>
+                </li>))
+            }
+          </ul>
+
+          <div className="catalog__films-list">
+            {
+              <FilmList films={filmsList}/>
+            }
+          </div>
+
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
         </section>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
-}
+};
 export default MainPage;

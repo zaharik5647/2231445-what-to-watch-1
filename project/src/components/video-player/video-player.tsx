@@ -1,8 +1,8 @@
 import { FC, useEffect, useRef } from 'react';
-import {Film} from '../../types/film.type';
+import { FilmShort } from '../../types/film.short.type';
 
 type VideoPlayerProps = {
-  film: Film;
+  film: FilmShort;
   isPlaying: boolean;
   needSound: boolean;
   width: number;
@@ -29,8 +29,8 @@ const VideoPlayer: FC<VideoPlayerProps> = (props) => {
   return (
     <video
       ref={playerRef}
-      src={film.previewVideoLink}
-      poster={film.posterImage}
+      src={film.previewPath}
+      poster={film.imageUrl}
       muted={!needSound}
       width={width}
       height={height}
