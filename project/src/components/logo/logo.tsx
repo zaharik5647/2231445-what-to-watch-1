@@ -1,4 +1,4 @@
-export default function Logo(): JSX.Element {
+export default function Logo(){
   return (
     <div className="logo">
       <a className="logo__link logo__link--light">
