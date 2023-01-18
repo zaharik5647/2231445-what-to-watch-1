@@ -3,7 +3,7 @@ export const ROUTES = {
   SIGNIN: '/login',
   MYLIST: '/mylist',
   FILM: '/films/:id',
-  ADDREVIEW: '/films/:id/review',
+  ADDREVIEW: '/films/:id/film-review',
   PLAYER: '/player/:id',
   NOTFOUND: '*',
   FILMPREFIX: '/films'
