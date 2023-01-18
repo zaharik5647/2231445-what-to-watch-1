@@ -1,18 +1,23 @@
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { FilmShort } from '../../types/film.short.type';
+
 export type FilmCardProps = {
-  name: string;
-  imageUrl: string;
+  film: FilmShort;
 }
 
-export default function FilmCard(props: FilmCardProps){
-  const {imageUrl, name} = props;
+const FilmCard: FC<FilmCardProps> = (props) => {
+  const { film } = props;
   return (
     <article className="small-film-card catalog__films-card">
       <div className="small-film-card__image">
-        <img src={imageUrl} alt={name} width="280" height="175"/>
+        <img src={film.imageUrl} alt={film.name} width="280" height="175"/>
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" >{name}</a>
+        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
       </h3>
     </article>
   );
-}
+};
+
+export default FilmCard;
