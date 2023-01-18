@@ -6,7 +6,7 @@ type HeaderProps = {
 }
 
 export default function Header(props: HeaderProps) {
-  const { isMyListVisible, myListCount } = props;  return (
+  const { isMyListVisible, myListCount } = props; return (
     <header className="page-header user-page__head">
       <Logo/>
       {isMyListVisible &&
