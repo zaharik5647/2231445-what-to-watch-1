@@ -4,7 +4,7 @@ export type Film = {
   description: string;
   genre: string;
   released: number;
-  commentsCount: number;
+  scoresCount: number;
   previewImage: string;
   previewVideoLink: string;
   videoLink: string;
