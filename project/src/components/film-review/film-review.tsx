@@ -1,5 +1,5 @@
-import { Review } from '../../types/review-type';
 import { FC } from 'react';
+import {Review} from '../../types/review-type';
 
 type FilmReviewProps = {
   review: Review;
@@ -15,7 +15,7 @@ const FilmReview: FC<FilmReviewProps> = (props) => {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime="2016-12-24">{review.publicationDate}</time>
+          <time className="review__date" dateTime="2016-12-24">{review.date}</time>
         </footer>
       </blockquote>
 

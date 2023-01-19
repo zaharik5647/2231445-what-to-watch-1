@@ -1,6 +1,6 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
 import { ReviewData } from '../../types/review.data';
 import RatingStar from './star-rating';
+import {ChangeEvent, FormEvent, useState} from 'react';
 
 const MAX_STARS_COUNT = 10;
 const MAX_COMMENT_LEN = 400;
@@ -56,13 +56,14 @@ function ReviewForm({disabled, onSubmit}: Props): JSX.Element {
           className="add-review__textarea"
           name="review-text"
           value={comment}
-          placeholder="ReviewType text"
+          placeholder="Отзыв должен быть от 50 до 400 символов"
           onChange={handleChangeComment}
           disabled={disabled}
         />
-        <div className="add-review__submit">
-          <button className="add-review__btn" disabled={isSubmitDisabled} type="submit">Post</button>
-        </div>
+      </div>
+
+      <div className="add-review__submit">
+        <button className="add-review__btn" disabled={isSubmitDisabled} type="submit">Post</button>
       </div>
     </form>
   );
