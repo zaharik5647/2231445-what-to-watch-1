@@ -4,7 +4,9 @@ export const TABS = ['Overview', 'Details', 'Reviews'];
 export enum APIRoute {
   Films = '/films',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Promo = '/promo',
+  Favorite = '/favorite',
 }
 export enum AuthorizationStatus {
   Auth = 'AUTH',

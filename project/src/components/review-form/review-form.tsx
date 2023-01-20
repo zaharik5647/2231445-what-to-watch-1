@@ -1,5 +1,6 @@
-import { Fragment, useState, ChangeEvent, FormEvent } from 'react';
 import { ReviewData } from '../../types/review.data';
+import RatingStar from './star-rating';
+import {ChangeEvent, FormEvent, useState} from 'react';
 
 const MAX_STARS_COUNT = 10;
 const MAX_COMMENT_LEN = 400;
@@ -11,45 +12,35 @@ type Props = {
 }
 function ReviewForm({disabled, onSubmit}: Props): JSX.Element {
   const [comment, setComment] = useState('');
-  const [starsCount, setRating] = useState(0);
+  const [rating, setRating] = useState(0);
 
   const handleReviewSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    onSubmit({comment: comment, starsCount: starsCount});
+    onSubmit({comment: comment, starsCount: rating});
   };
 
   const handleChangeComment = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
   };
 
-  const handleChangeRating = (evt: ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(evt.target.value, 10);
-    setRating(value);
+  const handleChangeRating = (newRating: number) => {
+    setRating(newRating);
   };
 
   const isSubmitDisabled = comment.length < MIN_COMMENT_LEN || comment.length > MAX_COMMENT_LEN || disabled;
 
-  const ratingStars = [Array(MAX_STARS_COUNT).keys()].map((_, index) => {
-    const currentStar = MAX_STARS_COUNT - index;
-
-    return (
-      <Fragment key={currentStar}>
-        <input
-          id={`star-${currentStar}}`}
-          className="rating__input"
-          name="rating"
-          value={currentStar}
-          type="radio"
+  const ratingStars = [...Array(MAX_STARS_COUNT)] // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+    .map((_, index) =>
+      (
+        <RatingStar
+          score={index + 1}
+          isChosen={rating === (index + 1)}
           onChange={handleChangeRating}
+          key={index} // eslint-disable-line react/no-array-index-key
         />
-        <label
-          className="rating__label"
-          htmlFor={`star-${currentStar}}`}
-        >Rating {index}
-        </label>
-      </Fragment>
-    );
-  });
+      )
+    )
+    .reverse();
 
   return (
     <form className="add-review__form" onSubmit={handleReviewSubmit}>
@@ -65,15 +56,17 @@ function ReviewForm({disabled, onSubmit}: Props): JSX.Element {
           className="add-review__textarea"
           name="review-text"
           value={comment}
-          placeholder="ReviewType text"
+          placeholder="Отзыв должен быть от 50 до 400 символов"
           onChange={handleChangeComment}
           disabled={disabled}
         />
-        <div className="add-review__submit">
-          <button className="add-review__btn" disabled={isSubmitDisabled} type="submit">Post</button>
-        </div>
+      </div>
 
+      <div className="add-review__submit">
+        <button className="add-review__btn" disabled={isSubmitDisabled} type="submit">Post</button>
       </div>
     </form>
   );
-}export default ReviewForm;
+}
+
+export default ReviewForm;

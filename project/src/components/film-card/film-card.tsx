@@ -1,7 +1,7 @@
-import {Film} from '../../types/film.type';
 import {useEffect, useState} from 'react';
 import VideoPlayer from '../video-player/video-player';
 import { Link } from 'react-router-dom';
+import {Film} from '../../types/film.type';
 
 
 export type FilmCardProps = {
@@ -23,9 +23,10 @@ function FilmCard({film, onHover}: FilmCardProps): JSX.Element {
     return () => {needUpdate = false;};
   }, [isNeedVideoToPlay]);
 
-  return (
-    <article
-      className="small-film-card catalog__films-card"
+  return(
+    <Link
+      to={`/films/${film.id}`}
+      className="small-film-card catalog__films-card small-film-card__link"
       onMouseEnter={() => {
         onHover(film);
         setIsNeedVideoToPlay(true);
@@ -46,9 +47,9 @@ function FilmCard({film, onHover}: FilmCardProps): JSX.Element {
         />
       </div>
       <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
+        {film.name}
       </h3>
-    </article>
+    </Link>
   );
 }
 export default FilmCard;
