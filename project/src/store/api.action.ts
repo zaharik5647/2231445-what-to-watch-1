@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { AppDispatch, State } from '../types/state.type';
 import { Film } from '../types/film.type';
-import { APIRoute, AuthorizationStatus } from '../constants/all-genres';
+import { APIRoute, AuthorizationStatus } from '../constants/constants';
 import { fillFilms, setDataLoadedStatus, changeAuthorizationStatus, setUser, setFavouriteFilms } from './actions';
 import { saveToken, dropToken } from '../services/token';
 import { User } from '../types/user.type';

@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import UserBlock from '../../components/user-block/user-block';
 import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { AppRoute, AuthorizationStatus } from '../../constants/all-genres';
+import { AppRoute, AuthorizationStatus } from '../../constants/constants';
 import { StatusCodes } from 'http-status-codes';
 import { AxiosError } from 'axios';
 import { redirectToRoute } from '../../store/actions';
@@ -47,10 +47,10 @@ const FilmPage: FC = () => {
       .then(() => setDataLoaded(true))
       .catch((err: AxiosError) => {
         if (err.response && err.response.status === StatusCodes.NOT_FOUND) {
-          dispatch(redirectToRoute(AppRoute.NOTFOUND));
+          dispatch(redirectToRoute(AppRoute.NotFound));
         }
       });
-  }, [id]);
+  }, [id, dispatch]);
 
   const handlePlayerBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -111,7 +111,6 @@ const FilmPage: FC = () => {
             <div className="film-card__poster film-card__poster--big">
               <img src={film?.posterImage} alt={film?.name} width="218" height="327" />
             </div>
-
             {film && reviews && <Tabs film={film} reviews={reviews} />}
           </div>
         </div>
@@ -121,12 +120,12 @@ const FilmPage: FC = () => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          {similarFilms && <FilmsList films={similarFilms} />}
+          {similarFilms && <FilmsList films={similarFilms.slice(0, 4)} />}
         </section>
 
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <a href="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>

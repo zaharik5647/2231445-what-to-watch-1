@@ -1,7 +1,7 @@
 import { Film } from './types/film.type';
-import { AppRoute } from './constants/all-genres';
+import { AppRoute } from './constants/constants';
 export const getFilmUrl = (film: Film): string => {
-  const bodyUrl = AppRoute.FILM.split(':')[0];
+  const bodyUrl = AppRoute.Film.split(':')[0];
   return `${bodyUrl}${film.id}`;
 };
 

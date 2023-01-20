@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { logoutAction } from '../../store/api.action';
 import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthorizationStatus } from '../../constants/all-genres';
+import { AuthorizationStatus } from '../../constants/constants';
 
 export type Props = {
   avatar: string;
@@ -24,7 +24,7 @@ function AuthedUserBlock({avatar}: Props): JSX.Element {
         </div>
       </li>
       <li className="user-block__item">
-        <a className="user-block__link" onClick={handleSignOutClick}>Sign out</a>
+        <a href="/" className="user-block__link" onClick={handleSignOutClick}>Sign out</a>
       </li>
     </>
   );

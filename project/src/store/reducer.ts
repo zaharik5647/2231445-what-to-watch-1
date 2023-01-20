@@ -8,7 +8,7 @@ import {
   setUser
 } from './actions';
 import { Film } from '../types/film.type';
-import { ALL_GENRES, AuthorizationStatus } from '../constants/all-genres';
+import { ALL_GENRES, AuthorizationStatus } from '../constants/constants';
 import { User } from '../types/user.type';
 
 type AppState = {
@@ -17,7 +17,7 @@ type AppState = {
   isDataLoaded: boolean;
   authorizationStatus: AuthorizationStatus;
   user: User | null;
-  favoriteFilms: Film[];
+  favouriteFilms: Film[];
 };
 
 const initialState: AppState = {
@@ -26,7 +26,7 @@ const initialState: AppState = {
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   user: null,
-  favoriteFilms: []
+  favouriteFilms: []
 
 };
 export const reducer = createReducer(initialState, (builder) => {
@@ -47,6 +47,6 @@ export const reducer = createReducer(initialState, (builder) => {
       state.user = action.payload;
     })
     .addCase(setFavouriteFilms, (state, action) => {
-      state.favoriteFilms = action.payload;
+      state.favouriteFilms = action.payload;
     });
 });

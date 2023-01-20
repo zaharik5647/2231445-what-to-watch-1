@@ -4,6 +4,7 @@ import {Review} from '../../types/review-type';
 type FilmReviewProps = {
   review: Review;
 }
+const formatDate = (date: string) => new Date(date).toLocaleDateString('en-us', { year:'numeric', month:'long', day:'numeric'});
 
 const FilmReview: FC<FilmReviewProps> = (props) => {
   const { review } = props;
@@ -15,11 +16,11 @@ const FilmReview: FC<FilmReviewProps> = (props) => {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime="2016-12-24">{review.date}</time>
+          <time className="review__date" dateTime="2016-12-24">{formatDate(review.date)}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{review.rating}</div>
+      <div className="review__rating">{review.rating.toFixed(1)}</div>
     </div>
   );
 };

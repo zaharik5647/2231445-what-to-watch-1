@@ -4,7 +4,7 @@ import { Film } from '../../types/film.type';
 import { redirectToRoute } from '../../store/actions';
 import { store } from '../../store';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { APIRoute, AuthorizationStatus } from '../../constants/all-genres';
+import { APIRoute, AuthorizationStatus } from '../../constants/constants';
 import { fetchFavouriteFilms } from '../../store/api.action';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 
 
 function MyListButton({ filmId }: Props): JSX.Element {
-  const { favoriteFilms: favoriteFilms, authorizationStatus } = useAppSelector((state) => state);
+  const { favouriteFilms: favoriteFilms, authorizationStatus } = useAppSelector((state) => state);
   const [isFavorite, setFavorite] = useState(favoriteFilms.some((film) => film.id === filmId));
 
   const dispatch = useAppDispatch();

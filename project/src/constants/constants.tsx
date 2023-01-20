@@ -14,14 +14,14 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 export enum AppRoute {
-  MAIN = '/',
-  SIGNIN = '/login',
-  MYLIST = '/mylist',
-  FILM = '/films/:id',
-  ADDREVIEW = '/films/:id/review',
-  PLAYER = '/player/:id',
-  NOTFOUND = '*',
-  FILMPREFIX = '/films'
+  Main = '/',
+  SignIn = '/login',
+  MyList = '/mylist',
+  Film = '/films/:id',
+  AddFilm = '/films/:id/review',
+  Player = '/player/:id',
+  NotFound = '/404-not-found',
+  Default = '*'
 }
 
 
